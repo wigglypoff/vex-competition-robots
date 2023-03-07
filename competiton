@@ -1,0 +1,61 @@
+
+#include "vex.h"
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    5, 2            
+// Motor8               motor         8               
+// Motor11              motor         11              
+// Controller1          controller                    
+// Motor20              motor         20              
+// Motor16              motor         16              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+using namespace vex;
+
+// A global instance of competition
+competition Competition;
+
+void pre_auton(void) {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+
+}
+
+void autonomous(void) {
+
+ Drivetrain.drive(forward);
+wait(2000,msec);
+  Motor8.spin(reverse);
+wait(2000,msec);
+Motor8.stop();
+Drivetrain.stop();
+Drivetrain.drive(reverse);
+wait(500,msec);
+Drivetrain.stop();
+
+}
+
+void usercontrol(void) {
+  // User control code here, inside the loop
+  while (1) {
+   
+
+    wait(20, msec); 
+  }
+}
+
+int main() {
+  // Set up callbacks for autonomous and driver control periods.
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
+
+  // Run the pre-autonomous function.
+  pre_auton();
+
+  // Prevent main from exiting with an infinite loop.
+  while (true) {
+    wait(100, msec);
+  }
+}
